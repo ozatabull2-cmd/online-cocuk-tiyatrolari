@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Çocuklarınız için ücretsiz online tiyatro gösterileri. Ankara Çocuk bünyesinde eğlenceli, eğitici ve kaliteli çocuk tiyatroları." />
+  <title>🎭 Çocuk Tiyatrosu — Ücretsiz Online Gösteriler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HERO HEADER -->
+  <header class="hero-header" id="top">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">✨ Ücretsiz &amp; Eğlenceli</div>
+      <div id="user-greeting" style="display:none; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-top: -10px; margin-bottom: 15px; color: white;">Hoş geldin, <span id="user-email-display"></span></div>
+      <h1 class="hero-title" id="app-title">🎭 Çocuk Tiyatrosu</h1>
+      <p class="hero-subtitle" id="app-subtitle">Minikler için büyülü sahne dünyası! Tüm gösteriler ücretsiz.</p>
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="video-count">0</span>
+          <span class="stat-label">Gösteri</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">%100</span>
+          <span class="stat-label">Ücretsiz</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">🎬</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f8f4ff"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ANNOUNCEMENT BAR (editable) -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span id="announcement-text">🌟 Her hafta yeni gösteriler ekleniyor! Beğendiğinizi arkadaşlarınızla paylaşın.</span>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- SECTION TITLE -->
+    <div class="section-header">
+      <h2 class="section-title" id="section-title">🎪 Tüm Gösteriler</h2>
+      <p class="section-desc" id="section-desc">Çocuğunuzla birlikte izlemek için harika seçenekler!</p>
+    </div>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Tümü</button>
+    </div>
+
+    <!-- VIDEO GRID -->
+    <div class="video-grid" id="video-grid">
+      <!-- Loading skeleton -->
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="empty-state" style="display:none;">
+      <div class="empty-icon">🎭</div>
+      <h3>Henüz gösteri eklenmedi</h3>
+      <p>Admin panelinden yeni gösteriler ekleyebilirsiniz.</p>
+    </div>
+
+  </main>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal-overlay" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="modal-video-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h2 class="modal-video-title" id="modal-video-title">Video Başlığı</h2>
+        <button class="modal-close-btn" id="modal-close" aria-label="Kapat">✕</button>
+      </div>
+      <div class="modal-video-wrapper">
+        <div class="iframe-container">
+          <iframe
+            id="youtube-iframe"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="modal-video-desc" id="modal-video-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="footer-mascot">🐣</div>
+    <p class="footer-text" id="footer-text">Ankara Çocuk bünyesinde sevgiyle hazırlandı 💜</p>
+    <p class="footer-copy">&copy; 2025 Ankara Çocuk. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="back-to-top" aria-label="Yukarı çık" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
