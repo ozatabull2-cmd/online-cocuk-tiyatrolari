@@ -23,11 +23,7 @@
       <p class="login-subtitle">Çocuk Tiyatrosu Admin Paneli</p>
       <form id="login-form" autocomplete="off">
         <div class="field-group">
-          <label for="admin-email">E-posta</label>
-          <input type="email" id="admin-email" placeholder="admin@email.com" required autocomplete="username" />
-        </div>
-        <div class="field-group">
-          <label for="admin-password">Şifre</label>
+          <label for="admin-password">Yönetici Şifresi</label>
           <input type="password" id="admin-password" placeholder="••••••••" required autocomplete="current-password" />
         </div>
         <div class="login-error" id="login-error" style="display:none;"></div>
@@ -39,54 +35,6 @@
     </div>
   </div>
 
-  <!-- FIREBASE SETUP SCREEN -->
-  <div class="setup-screen" id="setup-screen" style="display:none;">
-    <div class="setup-card">
-      <div class="setup-icon">🔥</div>
-      <h2 class="setup-title">Firebase Yapılandırması</h2>
-      <p class="setup-desc">Uygulamanız için Firebase proje bilgilerini girin. Bu bilgileri Firebase Console'dan alabilirsiniz.</p>
-      <form id="setup-form">
-        <div class="setup-grid">
-          <div class="field-group">
-            <label for="fb-api-key">API Key *</label>
-            <input type="text" id="fb-api-key" placeholder="AIza..." required />
-          </div>
-          <div class="field-group">
-            <label for="fb-auth-domain">Auth Domain *</label>
-            <input type="text" id="fb-auth-domain" placeholder="your-project.firebaseapp.com" required />
-          </div>
-          <div class="field-group">
-            <label for="fb-project-id">Project ID *</label>
-            <input type="text" id="fb-project-id" placeholder="your-project-id" required />
-          </div>
-          <div class="field-group">
-            <label for="fb-storage-bucket">Storage Bucket</label>
-            <input type="text" id="fb-storage-bucket" placeholder="your-project.appspot.com" />
-          </div>
-          <div class="field-group">
-            <label for="fb-messaging-id">Messaging Sender ID</label>
-            <input type="text" id="fb-messaging-id" placeholder="123456789" />
-          </div>
-          <div class="field-group">
-            <label for="fb-app-id">App ID *</label>
-            <input type="text" id="fb-app-id" placeholder="1:123:web:abc..." required />
-          </div>
-        </div>
-        <div class="field-group">
-          <label for="admin-password-setup">Admin Şifresi *</label>
-          <input type="password" id="admin-password-setup" placeholder="Güçlü bir şifre girin" required />
-          <small>Bu şifreyi admin paneline giriş için kullanacaksınız.</small>
-        </div>
-        <div class="setup-error" id="setup-error" style="display:none;"></div>
-        <button type="submit" class="btn-primary btn-full">
-          <span>Kaydet ve Başla</span> <span class="btn-icon">→</span>
-        </button>
-        <button type="button" class="btn-ghost btn-full" id="skip-setup-btn" style="margin-top:10px;">
-          Firebase olmadan devam et (Offline mod)
-        </button>
-      </form>
-    </div>
-  </div>
 
   <!-- ADMIN PANEL -->
   <div class="admin-layout" id="admin-layout" style="display:none;">
@@ -164,7 +112,7 @@
               </div>
               <div class="field-group span-2">
                 <label for="video-desc">Açıklama</label>
-                <textarea id="video-desc" placeholder="Videonun kısa açıklaması..." rows="3" maxlength="300"></textarea>
+                <textarea id="video-desc" placeholder="Videonun detaylı açıklaması..." rows="5" maxlength="3000"></textarea>
               </div>
               <div class="field-group">
                 <label for="video-category">Kategori</label>
@@ -282,55 +230,9 @@
           </div>
         </div>
         <div class="form-panel" style="display:block;">
-          <h3 class="form-section-title">🔥 Firebase Bağlantısı</h3>
-          <div class="form-grid">
-            <div class="field-group">
-              <label for="s-api-key">API Key</label>
-              <input type="text" id="s-api-key" />
-            </div>
-            <div class="field-group">
-              <label for="s-auth-domain">Auth Domain</label>
-              <input type="text" id="s-auth-domain" />
-            </div>
-            <div class="field-group">
-              <label for="s-project-id">Project ID</label>
-              <input type="text" id="s-project-id" />
-            </div>
-            <div class="field-group">
-              <label for="s-storage-bucket">Storage Bucket</label>
-              <input type="text" id="s-storage-bucket" />
-            </div>
-            <div class="field-group">
-              <label for="s-messaging-id">Messaging Sender ID</label>
-              <input type="text" id="s-messaging-id" />
-            </div>
-            <div class="field-group">
-              <label for="s-app-id">App ID</label>
-              <input type="text" id="s-app-id" />
-            </div>
-          </div>
-
-          <h3 class="form-section-title" style="margin-top:28px;">🔐 Admin Şifresi</h3>
-          <div class="form-grid">
-            <div class="field-group">
-              <label for="s-new-password">Yeni Şifre</label>
-              <input type="password" id="s-new-password" placeholder="••••••••" />
-            </div>
-            <div class="field-group">
-              <label for="s-confirm-password">Şifre Tekrar</label>
-              <input type="password" id="s-confirm-password" placeholder="••••••••" />
-            </div>
-          </div>
-
-          <div class="settings-info">
-            <div class="info-badge">💡</div>
-            <div>Firebase bilgilerinizi <strong>Firebase Console → Proje Ayarları → Web Uygulaması</strong> bölümünden alabilirsiniz.</div>
-          </div>
-
-          <div class="form-actions">
-            <button class="btn-primary" id="save-settings-btn">
-              <span>Ayarları Kaydet</span>
-            </button>
+          <div class="settings-info" style="background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd;">
+            <div class="info-badge">🔥</div>
+            <div>Uygulama şu an <strong>ankaracocukv3-b2182</strong> projesine bağlıdır ve veriler otomatik eşzamanlanarak Ankara Çocuk mobil uygulamasına gönderilir.</div>
           </div>
         </div>
 

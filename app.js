@@ -15,7 +15,15 @@ import {
 // İlk açılışta bu alanı kendi Firebase proje bilgilerinizle güncelleyin.
 // Admin panelini ilk kaydettiğinizde bu ayarlar Firestore'a da yazan ile senkron olur.
 
-let firebaseConfig = null;
+const firebaseConfig = {
+  apiKey: "AIzaSyBPbEuGqVofWdohAHJKqtmfEBN0Oc03Ya8",
+  authDomain: "ankaracocukv3-b2182.firebaseapp.com",
+  projectId: "ankaracocukv3-b2182",
+  storageBucket: "ankaracocukv3-b2182.firebasestorage.app",
+  messagingSenderId: "678969625372",
+  appId: "1:678969625372:web:6e910af53e1218ab4488d9"
+};
+
 let db = null;
 let videos = [];
 let currentFilter = "all";
@@ -223,68 +231,11 @@ async function loadFromFirestore() {
     }
   } catch (err) {
     console.error("Firestore error:", err);
-    loadFromLocalStorage();
+    // Hata olursa veya veri gelmezse boş liste göster
+    renderVideos([]);
   }
 }
 
-// ---- Load from LocalStorage (offline fallback) ----
-function loadFromLocalStorage() {
-  try {
-    const stored = localStorage.getItem("tiyatro_videos");
-    if (stored) {
-      videos = JSON.parse(stored).filter(v => v.active !== false);
-      renderVideos(videos);
-      buildFilterTabs(videos);
-    } else {
-      // Demo videos (ilk açılış)
-      videos = getDemoVideos();
-      renderVideos(videos);
-      buildFilterTabs(videos);
-    }
-
-    const texts = localStorage.getItem("tiyatro_page_texts");
-    if (texts) applyPageTexts(JSON.parse(texts));
-  } catch(e) {
-    videos = getDemoVideos();
-    renderVideos(videos);
-  }
-}
-
-// ---- Demo Videos ----
-function getDemoVideos() {
-  return [
-    {
-      id: "demo1",
-      title: "Kırmızı Başlıklı Kız — Çocuk Tiyatrosu",
-      description: "Dünyaca ünlü peri masalı, çocuk tiyatrosu sahnesine taşındı! Eğlenceli ve eğitici bir gösteri.",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      category: "Masal",
-      ageTag: "4-8 yaş",
-      active: true,
-      order: 1
-    },
-    {
-      id: "demo2",
-      title: "Pamuk Prenses ve Yedi Cüceler",
-      description: "Sevimli cüceler ve Pamuk Prenses'in büyülü dünyasına hoş geldiniz!",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      category: "Masal",
-      ageTag: "3-9 yaş",
-      active: true,
-      order: 2
-    },
-    {
-      id: "demo3",
-      title: "Pinokyo'nun Maceraları",
-      description: "Yalancılığın sonu nereye varır? Pinokyo ile birlikte öğrenin!",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      category: "Macera",
-      ageTag: "5-10 yaş",
-      active: true,
-      order: 3
-    }
-  ];
-}
 
 // ---- Handle Ankara Çocuk Login ----
 function handleAppLogin() {
@@ -334,11 +285,13 @@ window.addEventListener("scroll", () => {
 
   // Load config
   loadConfig();
+  // Firebase'i başlat
   const firebaseOk = initFirebase();
 
   if (firebaseOk) {
     await loadFromFirestore();
   } else {
-    loadFromLocalStorage();
+    // Firebase yoksa boş liste göster
+    renderVideos([]);
   }
 })();

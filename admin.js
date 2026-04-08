@@ -15,12 +15,21 @@ import {
   getDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // ==========================================
 // STATE
 // ==========================================
+const firebaseConfig = {
+  apiKey: "AIzaSyBPbEuGqVofWdohAHJKqtmfEBN0Oc03Ya8",
+  authDomain: "ankaracocukv3-b2182.firebaseapp.com",
+  projectId: "ankaracocukv3-b2182",
+  storageBucket: "ankaracocukv3-b2182.firebasestorage.app",
+  messagingSenderId: "678969625372",
+  appId: "1:678969625372:web:6e910af53e1218ab4488d9"
+};
+
 let db = null;
-let firebaseConfig = null;
 let videos = [];
 let editingVideoId = null;
 let deleteTargetId = null;
@@ -64,6 +73,11 @@ function initFirebase(config) {
     const app = initializeApp(config, "tiyatro-admin-" + Date.now());
     window._tiyatroAdminApp = app;
     db = getFirestore(app);
+
+    // Veritabanına yazabilmek için gizli (anonim) giriş yap
+    const auth = getAuth(app);
+    signInAnonymously(auth).catch(err => console.warn("Auth hatası:", err));
+
     return true;
   } catch(e) {
     console.warn("Firebase init hatası:", e.message);
@@ -171,7 +185,7 @@ function checkLogin() {
 }
 
 function doLogin(pass) {
-  const stored = load("tiyatro_admin_password") || "admin123";
+  const stored = load("tiyatro_admin_password") || "Ozz298610653329";
   if (pass === stored) {
     save("tiyatro_admin_logged", "true");
     return true;
@@ -433,23 +447,7 @@ function loadSettingsUI() {
 }
 
 function saveSettings() {
-  const config = {
-    apiKey: (el("s-api-key")?.value || "").trim(),
-    authDomain: (el("s-auth-domain")?.value || "").trim(),
-    projectId: (el("s-project-id")?.value || "").trim(),
-    storageBucket: (el("s-storage-bucket")?.value || "").trim(),
-    messagingSenderId: (el("s-messaging-id")?.value || "").trim(),
-    appId: (el("s-app-id")?.value || "").trim(),
-  };
-
-  if (config.projectId) {
-    save("tiyatro_firebase_config", config);
-    toast("Firebase ayarları kaydedildi! 🔥", "success");
-  } else {
-    toast("Project ID boş olamaz!", "error");
-    return;
-  }
-
+  // Şifre değiştirme işlemi
   const newPass = el("s-new-password")?.value || "";
   const confirmPass = el("s-confirm-password")?.value || "";
 
@@ -484,16 +482,10 @@ function subscribeToVideos() {
 // PANEL INIT
 // ==========================================
 function initAdminPanel() {
-  firebaseConfig = load("tiyatro_firebase_config");
-
-  if (firebaseConfig && firebaseConfig.projectId) {
-    const ok = initFirebase(firebaseConfig);
-    if (ok) {
-      subscribeToVideos();
-      loadPageTextsFirestore();
-    } else {
-      loadLocalVideos();
-    }
+  const ok = initFirebase(firebaseConfig);
+  if (ok) {
+    subscribeToVideos();
+    loadPageTextsFirestore();
   } else {
     loadLocalVideos();
   }
@@ -542,14 +534,12 @@ function handleSetupSubmit(e) {
 // UYGULAMA BAŞLATMA
 // ==========================================
 function startApp() {
-  const setupDone = load("tiyatro_setup_done");
+  // Setup artık hardcoded olduğu için direkt login veya admin ekranına geçiyoruz
   const loggedIn = checkLogin();
 
   if (loggedIn) {
     showScreen("admin-layout");
     initAdminPanel();
-  } else if (!setupDone) {
-    showScreen("setup-screen");
   } else {
     showScreen("login-screen");
   }
@@ -636,7 +626,6 @@ function startApp() {
   });
 
   // --- AYARLAR ---
-  on("save-settings-btn", "click", saveSettings);
   on("clear-all-btn", "click", () => {
     if (!confirm("TÜM veriler silinecek! Emin misiniz?")) return;
     ["tiyatro_videos","tiyatro_page_texts","tiyatro_firebase_config","tiyatro_setup_done"]

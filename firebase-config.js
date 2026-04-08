@@ -5,12 +5,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBPbEuGqVofWdohAHJKqtmfEBN0Oc03Ya8",
+  authDomain: "ankaracocukv3-b2182.firebaseapp.com",
+  projectId: "ankaracocukv3-b2182",
+  storageBucket: "ankaracocukv3-b2182.firebasestorage.app",
+  messagingSenderId: "678969625372",
+  appId: "1:678969625372:web:6e910af53e1218ab4488d9"
 };
 
 const app = initializeApp(firebaseConfig);
