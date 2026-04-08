@@ -125,9 +125,9 @@ function renderVideos(list) {
       <div class="card-body">
         <div class="card-category">${escapeHtml(cat)}</div>
         <h3 class="card-title">${escapeHtml(video.title)}</h3>
-        ${video.description ? `<p class="card-desc">${escapeHtml(video.description)}</p>` : ""}
+        ${video.description ? `<p class="card-desc">${formatText(video.description)}</p>` : ""}
         <div class="card-footer">
-          <button class="card-watch-btn" onclick="event.stopPropagation()">▶ İzle</button>
+          <button class="card-watch-btn">▶ İzle</button>
           <span class="card-age-tag">${escapeHtml(ageTag)}</span>
         </div>
       </div>
@@ -186,7 +186,7 @@ function applyPageTexts(texts) {
 function openModal(video) {
   const modal = document.getElementById("video-modal");
   document.getElementById("modal-video-title").textContent = video.title || "Gösteri";
-  document.getElementById("modal-video-desc").textContent = video.description || "";
+  document.getElementById("modal-video-desc").innerHTML = formatText(video.description || "");
   document.getElementById("youtube-iframe").src = getEmbedUrl(video.url);
 
   modal.classList.add("open");
@@ -198,6 +198,18 @@ function closeModal() {
   modal.classList.remove("open");
   document.getElementById("youtube-iframe").src = "";
   document.body.style.overflow = "";
+}
+
+// ---- Text Formatting (Markdown-ish) ----
+function formatText(str) {
+  if (!str) return "";
+  // Önce HTML taglerini temizle (güvenlik için)
+  let escaped = escapeHtml(str);
+  // Yenisatırları <br>'ye çevir
+  escaped = escaped.replace(/\n/g, '<br>');
+  // **kalın** yapılarını <b>kalın</b> yap
+  escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+  return escaped;
 }
 
 // ---- Escape HTML ----
