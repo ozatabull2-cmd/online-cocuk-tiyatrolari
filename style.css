@@ -587,6 +587,17 @@ body {
   height: 100%;
 }
 
+.yt-protection-layer {
+  position: absolute;
+  bottom: 0;
+  right: 54px; /* Tam ekran butonunu açık bırakmak için boşluk */
+  width: 100px; /* YouTube logosunun tahmini genişliği */
+  height: 45px;  /* Alt bardaki logonun yüksekliği */
+  z-index: 10;
+  cursor: default;
+  background: transparent;
+}
+
 .modal-footer {
   padding: 14px 20px 20px;
   border-top: 1.5px solid var(--border);
