@@ -587,17 +587,33 @@ body {
   height: 100%;
 }
 
-.yt-protection-layer {
+/* YouTube sol-üst köşe watermark/logo engeli (oynatırken belirir) */
+.yt-block-top {
   position: absolute;
-  bottom: 0;
-  left: 0; /* YouTube logosu sol-altta, bu yüzden sola konumlandırıyoruz */
-  width: 130px; /* YouTube logosunu kapsayacak genişlik */
-  height: 48px;  /* Alt kontrol çubuğunun yüksekliği */
+  top: 0;
+  left: 0;
+  width: 145px;
+  height: 46px;
   z-index: 10;
+  pointer-events: all;
   cursor: default;
   background: transparent;
-  /* Sağ-alttaki tam ekran butonu tamamen serbest kalır */
 }
+
+/* Alt kontrol çubuğu: YouTube logo/link engeli.
+   Sağdan 44px SERBEST bırakılıyor → TAM EKRAN butonu tıklanabilir */
+.yt-block-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 44px;
+  width: 110px;
+  height: 50px;
+  z-index: 10;
+  pointer-events: all;
+  cursor: default;
+  background: transparent;
+}
+
 
 .modal-footer {
   padding: 14px 20px 20px;
@@ -689,8 +705,27 @@ body {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+
+  /* Mobile modal: ekranın büykük çoğunluğunu kaplasın, video ferah görünsün */
+  .modal-overlay {
+    align-items: flex-end;
+  }
   .modal-container {
-    max-height: 96vh;
+    max-height: 100dvh;
+    height: 92dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .modal-header {
+    padding: 10px 14px 8px;
+  }
+  .modal-video-title {
+    font-size: 0.9rem;
+  }
+  .modal-footer {
+    padding: 8px 14px 10px;
+  }
+  .modal-video-desc {
+    font-size: 0.8rem;
   }
 }
 

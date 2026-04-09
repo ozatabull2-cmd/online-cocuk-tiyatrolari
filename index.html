@@ -101,10 +101,13 @@
             src=""
             title="YouTube video player"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
             allowfullscreen
           ></iframe>
-          <div class="yt-protection-layer"></div>
+          <!-- Sol-üst YouTube watermark'ı engeller -->
+          <div class="yt-block-top"></div>
+          <!-- Alt bar YouTube logosu engellenir; sağdaki ~44px TAM EKRAN butonu serbest -->
+          <div class="yt-block-bottom"></div>
         </div>
       </div>
       <div class="modal-footer">
