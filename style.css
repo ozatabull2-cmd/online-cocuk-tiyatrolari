@@ -590,12 +590,13 @@ body {
 .yt-protection-layer {
   position: absolute;
   bottom: 0;
-  right: 54px; /* Tam ekran butonunu açık bırakmak için boşluk */
-  width: 100px; /* YouTube logosunun tahmini genişliği */
-  height: 45px;  /* Alt bardaki logonun yüksekliği */
+  left: 0; /* YouTube logosu sol-altta, bu yüzden sola konumlandırıyoruz */
+  width: 130px; /* YouTube logosunu kapsayacak genişlik */
+  height: 48px;  /* Alt kontrol çubuğunun yüksekliği */
   z-index: 10;
   cursor: default;
   background: transparent;
+  /* Sağ-alttaki tam ekran butonu tamamen serbest kalır */
 }
 
 .modal-footer {
