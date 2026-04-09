@@ -295,20 +295,6 @@ window.addEventListener("scroll", () => {
     if (e.key === "Escape") closeModal();
   });
 
-  // Özel Tam Ekran butonu — iframe'i tam ekran yapar
-  document.getElementById("custom-fs-btn").addEventListener("click", () => {
-    const iframe = document.getElementById("youtube-iframe");
-    if (iframe.requestFullscreen) {
-      iframe.requestFullscreen();
-    } else if (iframe.webkitRequestFullscreen) {
-      iframe.webkitRequestFullscreen(); // Safari / iOS
-    } else if (iframe.mozRequestFullScreen) {
-      iframe.mozRequestFullScreen();    // Firefox
-    } else if (iframe.msRequestFullscreen) {
-      iframe.msRequestFullscreen();     // IE/Edge
-    }
-  });
-
   // Load config
   loadConfig();
   // Firebase'i başlat
